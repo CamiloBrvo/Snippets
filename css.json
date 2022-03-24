@@ -1,0 +1,24 @@
+{
+	"Reset Margin & Padding from *": {
+		"prefix": "res",
+		"body": [
+			"* {",
+			"   margin: 0;",
+			"   padding: 0;",
+			"}",
+		],
+		"description": "Reset Margin & Padding from *"
+	},
+	
+	"Reset Margin & Padding from body": {
+		"prefix": "res-b",
+		"body": [
+			"body {",
+			"   margin: 0;",
+			"   padding: 0;",
+			"}",
+		],
+		"description": "Reset Margin & Padding from body"
+	},
+	
+}
