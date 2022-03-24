@@ -15,5 +15,31 @@
 			"}",
 		],
 		"description": "Create Class Constructor"
+	},
+
+	"Create Class Constructor, GET and SET": {
+		"prefix": "ccgs",
+		"body": [
+			"public class ${1:ClassName}",
+			"{",
+			"   private ${2|string,int,float,double,bool,array,object|} ${3:variableName};",
+			"",
+			"   public ${1:ClassName}($2 $3)",
+			"   {",
+			"       this.$3 = $3;",
+			"   }",
+			"",
+			"   public string ${4:Id} { get => $3; set => $3 = value; }",
+			"}",
+		],
+		"description": "Create Class Constructor, GET and SET"
+	},
+
+	"Create GET and SET": {
+		"prefix": "cgs",
+		"body": [
+			"public string ${1:Id} { get => ${2:variableName}; set => $2 = value; }",
+		],
+		"description": "Create GET and SET"
 	}
 }
