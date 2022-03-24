@@ -1,0 +1,19 @@
+{
+	"Create Class Constructor": {
+		"prefix": "cc",
+		"body": [
+			"public class ${1:ClassName}",
+			"{",
+			"   private ${2|string,int,float,double,bool,array,object|} ${3:variableName};",
+			"",
+			"   public ${1:ClassName}($2 $3)",
+			"   {",
+			"       this.$3 = $3;",
+			"   }",
+			"",
+			
+			"}",
+		],
+		"description": "Create Class Constructor"
+	}
+}
