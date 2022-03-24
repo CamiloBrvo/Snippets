@@ -1,0 +1,241 @@
+{
+	
+	/* GENERATE CLASS */
+	"Generate Class": {
+		"prefix": "pc",
+		"body": [
+			"class ${1:ClassName}",
+			"{",
+			"   private $$2;",
+			"   /**",
+			"   * __construct",
+			"   *",
+			"   * @param ${3|string,int,float,double,bool,array,object|} $$2",
+			"   */",
+			"   public function __construct($$2) {",
+			"       $$this->$2 = $$2;",
+			"   }",
+			"}",
+		],
+		"description": "Generate Class"
+	},
+	
+	"Generate Class, GET and SET functions": {
+		"prefix": "pcgs",
+		"body": [
+			"class ${1:ClassName}",
+			"{",
+			"   private $$2;",
+			"   /**",
+			"   * __construct",
+			"   *",
+			"   * @param ${3|string,int,float,double,bool,array,object|} $$2",
+			"   */",
+			"   public function __construct($$2) {",
+			"       $$this->$2 = $$2;",
+			"   }",
+			"",
+			"   /**",
+			"   * get${4:functionName}",
+			"   *",
+			"   * @return ${3|string,int,float,double,bool,array,object|}",
+			"   */",
+			"   public function get${4:functionName}(){",
+			"     return $$this->${2:variableName};",
+			"   }",
+			"",
+			"   /**",
+			"   * set${4:functionName}",
+			"   *",
+			"   * @param ${3|string,int,float,double,bool,array,object|} $${2:variableName}",
+			"   * @return void",
+			"   */",
+			"   public function set${4:functionName}($${2:variableName}): void{",
+			"       $$this->${2:variableName} = $${2:variableName};",
+			"   }",
+			"}",
+		],
+		"description": "Generate Class, GET and SET functions"
+	},
+	
+	"Generate GET and SET functions": {
+		"prefix": "pgs",
+		"body": [
+			"/**",
+			"* get${1:functionName}",
+			"*",
+			"* @return ${3|string,int,float,double,bool,array,object|}",
+			"*/",
+			"public function get${1:functionName}(){",
+			"  return $$this->${2:variableName};",
+			"}",
+			"",
+			"/**",
+			"* set${1:functionName}",
+			"*",
+			"* @param ${3|string,int,float,double,bool,array,object|} $${2:variableName}",
+			"* @return void",
+			"*/",
+			"public function set${1:functionName}($${2:variableName}): void{",
+			"  $$this->${2:variableName} = $${2:variableName};",
+			"}"
+		],
+		"description": "Generate GET and SET functions"
+	},
+	
+	"Generate GET function": {
+		"prefix": "pg",
+		"body": [
+			"/**",
+			"* get${1:functionName}",
+			"*",
+			"* @return ${3|string,int,float,double,bool,array,object|}",
+			"*/",
+			"public function get${1:functionName}(){",
+			"  return $$this->${2:variableName};",
+			"}"
+		],
+		"description": "Generate GET function"
+	},
+	
+	"Generate SET function": {
+		"prefix": "ps",
+		"body": [
+			"/**",
+			"* set${1:functionName}",
+			"*",
+			"* @param ${3|string,int,float,double,bool,array,object|} $${2:variableName}",
+			"* @return void",
+			"*/",
+			"public function set${1:functionName}($${2:variableName}): void{",
+			"  $$this->${2:variableName} = $${2:variableName};",
+			"}"
+		],
+		"description": "Generate SET function"
+	},
+	/* GENERATE CLASS */
+	
+	/* GENERATE MANAGER */ 
+	"Generate Manager": {
+		"prefix": "pm",
+		"body": [
+			"class Manager",
+			"{",
+			"   protected function dbConnect()",
+			"   {",
+			"       $$login = '${1:username}';",
+			"       $$mdp = '${2:password}';",
+			"       $$db = '${3:DBName}';",
+			"       $$serveur = '${4:localhost}';",
+			"",
+			"       try {",
+			"           $$conn = new PDO('mysql:host=$$serveur;dbname=$$bd', $$login, $$mdp, array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES UTF8'));",
+			"           $$conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);",
+			"           return $$conn;",
+			"       } catch (PDOException $$e) {",
+			"           print 'Erreur de connexion PDO ';",
+			"           die();",
+			"       }",
+			"   }",
+			"",
+			"   protected function getPDO()",
+			"   {",
+			"       static $$pdo = null;",
+			"       if ($$pdo == null) {",
+			"           $$pdo = $$this->dbConnect();",
+			"       }",
+			"       return $$pdo;",
+			"   }",
+			"}",
+		],
+		"description": "Generate Manager"
+	},
+	
+	
+	/* GENERATE MANAGER */ 
+	
+	/* GENERATE CLASS MANAGER */
+	"Generate Class Manager": {
+		"prefix": "pcm",
+		"body": [
+			"require_once('model/Manager.php');",
+			"require_once('model/${1:ClassName}.php');",
+			"",
+			"class ${1:ClassName}Manager extends Manager",
+			"{",
+			"   $2",
+			"}",
+		],
+		"description": "Generate Class Manager"
+	},
+	
+	"Generate GET function Manager": {
+		"prefix": "pgm",
+		"body": [
+			"/**",
+			"* get",
+			"*",
+			"* @return ${5|string,int,float,double,bool,array,object|}",
+			"*/",
+			"public function get(${1:ClassName} $${2:object}){",
+			"   $$q = $$this->getPDO()->query('SELECT * FROM $2 WHERE ${3:id} = '.(int) $$2->$4());",
+			"   $$data = $$q->fetch(PDO::FETCH_ASSOC);",
+			"   return new ${1:ClassName}($$data['$6'],);",
+			"}",
+		],
+		"description": "Generate GET ClassManager function"
+	},
+	
+	"Generate SET function Manager": {
+		"prefix": "psm",
+		"body": [
+			"/**",
+			"* set",
+			"*",
+			"* @return void",
+			"*/",
+			"public function set(${1:ClassName} $${2:object}){",
+			"   $$q = $this->getPDO()->query('INSERT INTO $2 ($3) VALUES ($${2:object}->$4)');",
+			"   $$q->execute();",
+			"}",
+		],
+		"description": "Generate GET ClassManager function"
+	},
+	
+	"Generate UPDATE Function Manager": {
+		"prefix": "pum",
+		"body": [
+			"/**",
+			"* update",
+			"*",
+			"* @return void",
+			"*/",
+			"public function update(${1:ClassName} $${2:object}){",
+			"   $$q = $this->getPDO()->query('UPDATE $2 SET ${3:column} = $${2:object}->${4:value}(), ${7:column = value} WHERE ${5:column} = $${2:object}->${6:value}()');",
+			"   $$q->execute();",
+			"}",
+		],
+		"description": "Generate UPDATE Function Manager"
+	},
+	
+	"Generate DELETE Function Manager": {
+		"prefix": "pdm",
+		"body": [
+			"/**",
+			"* delete",
+			"*",
+			"* @return void",
+			"*/",
+			"public function delete(${1:ClassName} $${2:objet}){",
+			"   $q = $this->getPDO()->query('DELETE FROM $2 WHERE ${3:column} = '.$$2->${4:value}());",
+			"   $q->execute();",
+			"}",
+		],
+		"description": "Generate DELETE Function Manager"
+	},
+	
+	
+	
+	/* GENERATE CLASS MANAGER */
+	
+}
