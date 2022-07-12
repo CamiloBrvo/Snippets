@@ -2,16 +2,21 @@
 	"Create Class Constructor": {
 		"prefix": "cc",
 		"body": [
-			"public class ${1:ClassName}",
+			"/// <summary>",
+			"/// Class <c>${1:ClassName}</c> ${2:ClassDef}.",
+			"/// </summary>",
+			"class ${1:ClassName}",
 			"{",
-			"   private ${2|string,int,float,double,bool,array,object|} ${3:variableName};",
+			"    /// <summary>",
+        	"    /// Instance variable <c>${4}</c> ${5:VariableDef}.",
+        	"    /// </summary>",
+			"    private ${3|string,int,float,double,bool,array,object|} ${4:variableName};",
 			"",
-			"   public ${1:ClassName}($2 $3)",
-			"   {",
-			"       this.$3 = $3;",
-			"   }",
+			"    public ${1:ClassName}($3 $4)",
+			"    {",
+			"       this.$4 = $4;",
+			"    }",
 			"",
-			
 			"}",
 		],
 		"description": "Create Class Constructor"
@@ -20,16 +25,17 @@
 	"Create Class Constructor, GET and SET": {
 		"prefix": "ccgs",
 		"body": [
-			"public class ${1:ClassName}",
+			"class ${1:ClassName}",
 			"{",
-			"   private ${2|string,int,float,double,bool,array,object|} ${3:variableName};",
+			"    private ${2|string,int,float,double,bool,array,object|} ${3:variableName};",
 			"",
-			"   public ${1:ClassName}($2 $3)",
-			"   {",
+			"    public ${1:ClassName}($2 $3)",
+			"    {",
 			"       this.$3 = $3;",
-			"   }",
+			"    }",
 			"",
-			"   public string ${4:Id} { get => $3; set => $3 = value; }",
+			"    public ${4|string,int,float,double,bool,array,object|} ${5:Id} { get => $3; set => $3 = value; }",
+			"",
 			"}",
 		],
 		"description": "Create Class Constructor, GET and SET"
@@ -38,8 +44,34 @@
 	"Create GET and SET": {
 		"prefix": "cgs",
 		"body": [
-			"public string ${1:Id} { get => ${2:variableName}; set => $2 = value; }",
+			"/// <summary>",
+			"/// GET and SET <c>${2:FunctionName}</c> ${4:GetSetDef}.",
+			"/// </summary>",
+			"public ${1|string,int,float,double,bool,array,object|} ${2:Id} { get => ${3:variableName}; set => $2 = value; }",
 		],
 		"description": "Create GET and SET"
+	},
+
+	"Create Variable": {
+		"prefix": "cv",
+		"body": [
+			"${1|string,int,float,double,bool,array,object|} ${2:variableName}",
+		],
+		"description": "Create Variable"
+	},
+
+	"Create Function": {
+		"prefix": "cf",
+		"body": [
+			"/// <summary>",
+			"/// Function <c>${2:FunctionName}</c> ${5:FunctionDef}.",
+			"/// </summary>",
+			"${1|public,private|} ${2:FunctionName}(${3|string,int,float,double,bool,array,object|} ${4:variableName})",
+        	"{",
+            	"",
+        	"}",
+		],
+		"description": "Create Variable"
 	}
 }
+
